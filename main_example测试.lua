@@ -416,11 +416,22 @@ DoorsTab:Select()
 -- Additional Tabs
 local GeneralTab = Window:Tab({
     Title = "通用",
-    Icon = "bird",
-    Locked = false,
+    Icon = "door",
+    IconColor = Grey,
+    Border = true,
 })
+
 local GeneralSection = GeneralTab:Section({
-    Title = "通用",
+    Title = "Doors Control",
+})
+
+GeneralSection:Button({
+    Title = "Open Door",
+    Callback = function()
+        print("Open Door pressed")
+        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+    end
 })
 
 -- Select the General (通用) tab programmatically
