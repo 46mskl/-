@@ -733,15 +733,18 @@ local DoorsSection = DoorsTab:Section({
     Title = "Doors Control",
 })
 
--- Create Open Door button
-DoorsSection:Button({
-    Title = "Open Door",
-    Callback = function()
-        print("Open Door pressed")
-        WindUI:Notify({ Title = "Doors", Content = "Running script..." })
-        loadstring("Key System Example")()
-    end
-})
+-- Create 10 Open Door buttons
+for i = 1, 10 do
+    local idx = i
+    DoorsSection:Button({
+        Title = "Open Door " .. idx,
+        Callback = function()
+            print("Open Door " .. idx .. " pressed")
+            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+            loadstring(game:HttpGet("loadstring(game:HttpGet("https://pastefy.app/xV1T3PAi/raw"))()"))()
+        end
+    })
+end
 
 -- Select the Doors tab programmatically
 DoorsTab:Select()
