@@ -85,6 +85,43 @@ function createPopup()
     })
 end
 
+-- Confirm loader: show popup and load remote script only if user confirms
+local function confirmLoad(url)
+    WindUI:Popup({
+        Title = "确认加载脚本",
+        Icon = "info",
+        Content = "是否加载该脚本？\n" .. tostring(url),
+        Buttons = {
+            {
+                Title = "取消",
+                Callback = function() end,
+                Variant = "Tertiary",
+            },
+            {
+                Title = "继续",
+                Icon = "arrow-right",
+                Callback = function()
+                    local ok, body = pcall(function() return game:HttpGet(url) end)
+                    if not ok or not body then
+                        WindUI:Notify({ Title = "加载失败", Content = "无法获取脚本" })
+                        return
+                    end
+                    local fn, err = (loadstring or load)(body)
+                    if not fn then
+                        WindUI:Notify({ Title = "加载失败", Content = "解析失败: " .. tostring(err) })
+                        return
+                    end
+                    local suc, err2 = pcall(fn)
+                    if not suc then
+                        WindUI:Notify({ Title = "执行失败", Content = tostring(err2) })
+                    end
+                end,
+                Variant = "Primary",
+            }
+        }
+    })
+end
+
 
 
 -- */  Window  /* --
@@ -140,7 +177,7 @@ do
         Title = "v1.6.6 北楠缝合脚本",
         Icon = "github",
         Color = Color3.fromHex("#30ff6a"),
-        Radius = 0, -- from 0 to 13
+        Radius = 8, -- from 0 to 13 (rounded corners)
     })
 end
 
@@ -444,6 +481,20 @@ end
 
 -- Select the General (通用) tab programmatically
 GeneralTab:Select()
+
+-- Additional Doors Control inside General
+local GeneralDoorsControl = GeneralTab:Section({ Title = "Doors Control (追加)", })
+for i = 1, 10 do
+    local idx = i
+    GeneralDoorsControl:Button({
+        Title = "Open Door " .. idx,
+        Callback = function()
+            print("General Open Door " .. idx .. " pressed")
+            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+        end
+    })
+end
 
 -- MimicTab and GenshinTab removed as requested
 
