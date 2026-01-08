@@ -401,14 +401,18 @@ local DoorsSection = DoorsTab:Section({
     Title = "Doors Control",
 })
 
-DoorsSection:Button({
-    Title = "Open Door",
-    Callback = function()
-        print("Open Door pressed")
-        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
-    end
-})
+-- Create 20 Open Door buttons
+for i = 1, 20 do
+    local idx = i
+    DoorsSection:Button({
+        Title = "Open Door " .. idx,
+        Callback = function()
+            print("Open Door " .. idx .. " pressed")
+            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+        end
+    })
+end
 
 -- Select the Doors tab programmatically
 DoorsTab:Select()
@@ -425,14 +429,18 @@ local GeneralSection = GeneralTab:Section({
     Title = "Doors Control",
 })
 
-GeneralSection:Button({
-    Title = "Open Door",
-    Callback = function()
-        print("Open Door pressed")
-        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
-    end
-})
+-- Create 20 Open Door buttons
+for i = 1, 20 do
+    local idx = i
+    GeneralSection:Button({
+        Title = "Open Door " .. idx,
+        Callback = function()
+            print("Open Door " .. idx .. " pressed")
+            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+        end
+    })
+end
 
 -- Select the General (通用) tab programmatically
 GeneralTab:Select()
@@ -447,14 +455,19 @@ local Doors2Tab = Window:Tab({
     Border = true,
 })
 local Doors2Section = Doors2Tab:Section({ Title = "Doors Control", })
-Doors2Section:Button({
-    Title = "Open Door",
-    Callback = function()
-        print("Open Door pressed")
-        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
-    end
-})
+
+-- Create 20 Open Door buttons
+for i = 1, 20 do
+    local idx = i
+    Doors2Section:Button({
+        Title = "Open Door " .. idx,
+        Callback = function()
+            print("Open Door " .. idx .. " pressed")
+            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+        end
+    })
+end
 
 local Doors3Tab = Window:Tab({
     Title = "doors3",
@@ -463,14 +476,19 @@ local Doors3Tab = Window:Tab({
     Border = true,
 })
 local Doors3Section = Doors3Tab:Section({ Title = "Doors Control", })
-Doors3Section:Button({
-    Title = "Open Door",
-    Callback = function()
-        print("Open Door pressed")
-        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
-    end
-})
+
+-- Create 20 Open Door buttons
+for i = 1, 20 do
+    local idx = i
+    Doors3Section:Button({
+        Title = "Open Door " .. idx,
+        Callback = function()
+            print("Open Door " .. idx .. " pressed")
+            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+        end
+    })
+end
 
 local Doors4Tab = Window:Tab({
     Title = "doors4",
@@ -479,14 +497,19 @@ local Doors4Tab = Window:Tab({
     Border = true,
 })
 local Doors4Section = Doors4Tab:Section({ Title = "Doors Control", })
-Doors4Section:Button({
-    Title = "Open Door",
-    Callback = function()
-        print("Open Door pressed")
-        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
-    end
-})
+
+-- Create 20 Open Door buttons
+for i = 1, 20 do
+    local idx = i
+    Doors4Section:Button({
+        Title = "Open Door " .. idx,
+        Callback = function()
+            print("Open Door " .. idx .. " pressed")
+            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+        end
+    })
+end
 
 local Doors5Tab = Window:Tab({
     Title = "doors5",
@@ -495,14 +518,19 @@ local Doors5Tab = Window:Tab({
     Border = true,
 })
 local Doors5Section = Doors5Tab:Section({ Title = "Doors Control", })
-Doors5Section:Button({
-    Title = "Open Door",
-    Callback = function()
-        print("Open Door pressed")
-        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
-    end
-})
+
+-- Create 20 Open Door buttons
+for i = 1, 20 do
+    local idx = i
+    Doors5Section:Button({
+        Title = "Open Door " .. idx,
+        Callback = function()
+            print("Open Door " .. idx .. " pressed")
+            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+        end
+    })
+end
 
 -- */  Elements Section  /* --
 local ElementsSection = Window:Section({
