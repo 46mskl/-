@@ -376,6 +376,18 @@ local Window = WindUI:CreateWindow({
                         "rbxassetid://87574517784098",
                     }
 
+                    -- Auto-include Window.Background if it's an rbxassetid
+                    pcall(function()
+                        if Window and type(Window.Background) == "string" and Window.Background:match("^rbxassetid://") then
+                            local bg = Window.Background
+                            local found = false
+                            for _, v in ipairs(assets) do
+                                if v == bg then found = true break end
+                            end
+                            if not found then table.insert(assets, bg) end
+                        end
+                    end)
+
                     LoaderShow()
 
                     for i, asset in ipairs(assets) do
@@ -444,6 +456,18 @@ do
         Radius = 8, -- from 0 to 13 (rounded corners)
     })
 end
+
+-- Set window background image (safe, pcall)
+pcall(function()
+    if Window and Window.SetBackgroundImage then
+        Window:SetBackgroundImage("rbxassetid://87574517784098")
+    else
+        -- fallback: set Window.Background field if available
+        if Window and Window.Background ~= nil then
+            Window.Background = "rbxassetid://87574517784098"
+        end
+    end
+end)
 
 -- */  Theme (soon)  /* --
 do
