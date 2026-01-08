@@ -137,10 +137,10 @@ local Window = WindUI:CreateWindow({
 -- */  Tags  /* --
 do
     Window:Tag({
-        Title = "v" .. WindUI.Version,
+        Title = "v1.6.6 北楠缝合脚本",
         Icon = "github",
-        Color = Color3.fromHex("#1c1c1c"),
-        Border = true,
+        Color = Color3.fromHex("#30ff6a"),
+        Radius = 0, -- from 0 to 13
     })
 end
 
