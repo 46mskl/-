@@ -401,8 +401,8 @@ local DoorsSection = DoorsTab:Section({
     Title = "Doors Control",
 })
 
--- Create 20 Open Door buttons
-for i = 1, 20 do
+-- Create 10 Open Door buttons
+for i = 1, 10 do
     local idx = i
     DoorsSection:Button({
         Title = "Open Door " .. idx,
@@ -429,8 +429,8 @@ local GeneralSection = GeneralTab:Section({
     Title = "Doors Control",
 })
 
--- Create 20 Open Door buttons
-for i = 1, 20 do
+-- Create 10 Open Door buttons
+for i = 1, 10 do
     local idx = i
     GeneralSection:Button({
         Title = "Open Door " .. idx,
@@ -456,8 +456,8 @@ local Doors2Tab = Window:Tab({
 })
 local Doors2Section = Doors2Tab:Section({ Title = "Doors Control", })
 
--- Create 20 Open Door buttons
-for i = 1, 20 do
+-- Create 10 Open Door buttons
+for i = 1, 10 do
     local idx = i
     Doors2Section:Button({
         Title = "Open Door " .. idx,
@@ -477,8 +477,8 @@ local Doors3Tab = Window:Tab({
 })
 local Doors3Section = Doors3Tab:Section({ Title = "Doors Control", })
 
--- Create 20 Open Door buttons
-for i = 1, 20 do
+-- Create 10 Open Door buttons
+for i = 1, 10 do
     local idx = i
     Doors3Section:Button({
         Title = "Open Door " .. idx,
@@ -498,8 +498,8 @@ local Doors4Tab = Window:Tab({
 })
 local Doors4Section = Doors4Tab:Section({ Title = "Doors Control", })
 
--- Create 20 Open Door buttons
-for i = 1, 20 do
+-- Create 10 Open Door buttons
+for i = 1, 10 do
     local idx = i
     Doors4Section:Button({
         Title = "Open Door " .. idx,
@@ -519,8 +519,8 @@ local Doors5Tab = Window:Tab({
 })
 local Doors5Section = Doors5Tab:Section({ Title = "Doors Control", })
 
--- Create 20 Open Door buttons
-for i = 1, 20 do
+-- Create 10 Open Door buttons
+for i = 1, 10 do
     local idx = i
     Doors5Section:Button({
         Title = "Open Door " .. idx,
@@ -532,9 +532,9 @@ for i = 1, 20 do
     })
 end
 
--- Bulk create 20 doors tabs; each tab has 20 "Doors Control" sections; each section has 20 Open Door buttons
--- WARNING: this will create 20*20*20 = 8000 buttons; may affect performance
-for t = 1, 20 do
+-- Bulk create 10 doors tabs; each tab has 10 "Doors Control" sections; each section has 10 Open Door buttons
+-- WARNING: this will create 10*10*10 = 1000 buttons; may affect performance
+for t = 1, 10 do
     local tabName = "doors_bulk_" .. t
     local BulkTab = Window:Tab({
         Title = tabName,
@@ -543,10 +543,10 @@ for t = 1, 20 do
         Border = true,
     })
 
-    for s = 1, 20 do
+    for s = 1, 10 do
         local sIdx = s
         local Sec = BulkTab:Section({ Title = "Doors Control " .. sIdx })
-        for b = 1, 20 do
+        for b = 1, 10 do
             local bIdx = b
             Sec:Button({
                 Title = "Open Door " .. sIdx .. "-" .. bIdx,
