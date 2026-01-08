@@ -699,7 +699,7 @@ do
         IconAlign = "Left",
         Icon = "", -- removing icon
         Callback = function()
-            tableToClipboard(WindUI)
+            setclipboard("1059240553")
             WindUI:Notify({
                 Title = "1059240553",
                 Content = "Copied to Clipboard!"
