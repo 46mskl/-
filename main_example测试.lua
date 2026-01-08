@@ -366,8 +366,8 @@ local Window = WindUI:CreateWindow({
     },
 
     KeySystem = {
-        Title = "Key System Example  |  WindUI Example",
-        Note = "Key System. Key: 114514",
+        Title = "北楠制作  |  优质脚本缝合",
+        Note = "Key System. Key: 1951835718",
         KeyValidator = function(EnteredKey)
             if tostring(EnteredKey) == "114514" then
                 -- Show loader and preload assets
@@ -464,7 +464,7 @@ Window:EditOpenButton({
 -- */  Tags  /* --
 do
     Window:Tag({
-        Title = "v1.6.6 北楠缝合脚本",
+        Title = "v0.0.1 北楠缝合脚本",
         Icon = "github",
         Color = Color3.fromHex("#30ff6a"),
         Radius = 8, -- from 0 to 13 (rounded corners)
