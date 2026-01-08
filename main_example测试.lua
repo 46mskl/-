@@ -437,22 +437,71 @@ GeneralSection:Button({
 -- Select the General (通用) tab programmatically
 GeneralTab:Select()
 
-local MimicTab = Window:Tab({
-    Title = "模仿者",
-    Icon = "bird",
-    Locked = false,
+-- MimicTab and GenshinTab removed as requested
+
+-- Additional Doors-like Tabs
+local Doors2Tab = Window:Tab({
+    Title = "doors2",
+    Icon = "door",
+    IconColor = Grey,
+    Border = true,
 })
-local MimicSection = MimicTab:Section({
-    Title = "模仿者",
+local Doors2Section = Doors2Tab:Section({ Title = "Doors Control", })
+Doors2Section:Button({
+    Title = "Open Door",
+    Callback = function()
+        print("Open Door pressed")
+        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+    end
 })
 
-local GenshinTab = Window:Tab({
-    Title = "原神",
-    Icon = "bird",
-    Locked = false,
+local Doors3Tab = Window:Tab({
+    Title = "doors3",
+    Icon = "door",
+    IconColor = Grey,
+    Border = true,
 })
-local GenshinSection = GenshinTab:Section({
-    Title = "原神",
+local Doors3Section = Doors3Tab:Section({ Title = "Doors Control", })
+Doors3Section:Button({
+    Title = "Open Door",
+    Callback = function()
+        print("Open Door pressed")
+        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+    end
+})
+
+local Doors4Tab = Window:Tab({
+    Title = "doors4",
+    Icon = "door",
+    IconColor = Grey,
+    Border = true,
+})
+local Doors4Section = Doors4Tab:Section({ Title = "Doors Control", })
+Doors4Section:Button({
+    Title = "Open Door",
+    Callback = function()
+        print("Open Door pressed")
+        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+    end
+})
+
+local Doors5Tab = Window:Tab({
+    Title = "doors5",
+    Icon = "door",
+    IconColor = Grey,
+    Border = true,
+})
+local Doors5Section = Doors5Tab:Section({ Title = "Doors Control", })
+Doors5Section:Button({
+    Title = "Open Door",
+    Callback = function()
+        print("Open Door pressed")
+        WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+    end
 })
 
 -- */  Elements Section  /* --
