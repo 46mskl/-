@@ -122,7 +122,30 @@ local function confirmLoad(url)
     })
 end
 
+-- Example popup from user
+local function showExamplePopup()
+    WindUI:Popup({
+        Title = "Popup Title",
+        Icon = "info",
+        Content = "Popup content",
+        Buttons = {
+            {
+                Title = "Cancel",
+                Callback = function() end,
+                Variant = "Tertiary",
+            },
+            {
+                Title = "Continue",
+                Icon = "arrow-right",
+                Callback = function() end,
+                Variant = "Primary",
+            }
+        }
+    })
+end
 
+-- Show popup immediately on script load
+pcall(showExamplePopup)
 
 -- */  Window  /* --
 local Window = WindUI:CreateWindow({
