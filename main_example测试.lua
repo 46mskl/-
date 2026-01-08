@@ -147,6 +147,40 @@ end
 -- Show popup immediately on script load
 pcall(showExamplePopup)
 
+-- Debug: Preload image to verify accessibility and log results
+task.spawn(function()
+    local cp = game:GetService("ContentProvider")
+    local url = "rbxassetid://87574517784098"
+    local ok, err = pcall(function() cp:PreloadAsync({url}) end)
+    print("[WindUI Debug] Preload:", url, ok, err)
+    if not ok then
+        pcall(function() WindUI:Notify({ Title = "Preload Failed", Content = tostring(err) }) end)
+    end
+end)
+
+-- Debug: Check WindUI Icon parsing behavior for raw asset id
+task.spawn(function()
+    local ok, res = pcall(function()
+        if WindUI and WindUI.Icons and WindUI.Icons.Icon then
+            return WindUI.Icons.Icon("rbxassetid://87574517784098")
+        end
+        return nil
+    end)
+
+    if ok and res then
+        if type(res) == "table" then
+            print("[WindUI Debug] Icon parsed image:", res[1])
+            pcall(function() WindUI:Notify({ Title = "Icon Parsed", Content = tostring(res[1]) }) end)
+        else
+            print("[WindUI Debug] Icon returned:", res)
+            pcall(function() WindUI:Notify({ Title = "Icon Parsed", Content = tostring(res) }) end)
+        end
+    else
+        print("[WindUI Debug] Icon parse failed:", res)
+        pcall(function() WindUI:Notify({ Title = "Icon Parse Failed", Content = tostring(res) }) end)
+    end
+end)
+
 -- */  Window  /* --
 local Window = WindUI:CreateWindow({
     Title = ".ftgs hub  |  WindUI Example",
