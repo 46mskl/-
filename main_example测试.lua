@@ -147,6 +147,159 @@ end
 -- Show popup immediately on script load
 pcall(showExamplePopup)
 
+-- Loader UI: draggable, transparent, progress bar
+local function createLoaderUI()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    if not player then return end
+
+    local playerGui = player:WaitForChild("PlayerGui")
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "ftgsLoader"
+    gui.ResetOnSpawn = false
+    gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    gui.Parent = playerGui
+
+    local frame = Instance.new("Frame")
+    frame.Name = "LoaderFrame"
+    frame.Size = UDim2.new(0, 300, 0, 84)
+    frame.Position = UDim2.new(0.5, -150, 0.06, 0)
+    frame.AnchorPoint = Vector2.new(0.5, 0)
+    frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    frame.BackgroundTransparency = 0.55
+    frame.Active = true
+
+    -- Acrylic overlay (tiled noise texture) for glassy look
+    local acrylic = Instance.new("ImageLabel")
+    acrylic.Name = "Acrylic"
+    acrylic.Size = UDim2.new(1, 0, 1, 0)
+    acrylic.Position = UDim2.new(0, 0, 0, 0)
+    acrylic.BackgroundTransparency = 1
+    acrylic.Image = "rbxassetid://97324581055162" -- WindUI Glass texture
+    acrylic.ImageTransparency = 0.75
+    acrylic.ScaleType = Enum.ScaleType.Tile
+    acrylic.TileSize = UDim2.new(0, 128, 0, 128)
+    local acrylicCorner = Instance.new("UICorner")
+    acrylicCorner.CornerRadius = UDim.new(0, 8)
+    acrylicCorner.Parent = acrylic
+    acrylic.Parent = frame
+
+    -- Subtle border stroke
+    local stroke = Instance.new("UIStroke")
+    stroke.Color = Color3.fromRGB(255,255,255)
+    stroke.Transparency = 0.95
+    stroke.Thickness = 1
+    stroke.Parent = frame
+
+    local frameCorner = Instance.new("UICorner")
+    frameCorner.CornerRadius = UDim.new(0, 8)
+    frameCorner.Parent = frame
+    frame.Parent = gui
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, 0, 0, 22)
+    title.Position = UDim2.new(0, 0, 0, 6)
+    title.BackgroundTransparency = 1
+    title.Text = "加载中..."
+    title.TextColor3 = Color3.new(1, 1, 1)
+    title.Font = Enum.Font.SourceSansBold
+    title.TextSize = 16
+    title.Parent = frame
+
+    local progressBg = Instance.new("Frame")
+    progressBg.Name = "ProgressBg"
+    progressBg.Size = UDim2.new(1, -20, 0, 20)
+    progressBg.Position = UDim2.new(0, 10, 0, 32)
+    progressBg.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    progressBg.BackgroundTransparency = 0.25
+    local progressBgCorner = Instance.new("UICorner")
+    progressBgCorner.CornerRadius = UDim.new(0, 6)
+    progressBgCorner.Parent = progressBg
+    progressBg.Parent = frame
+
+    local progressFill = Instance.new("Frame")
+    progressFill.Name = "Fill"
+    progressFill.Size = UDim2.new(0, 0, 1, 0)
+    progressFill.BackgroundColor3 = Color3.fromRGB(44, 204, 115)
+    progressFill.Parent = progressBg
+    local fillCorner = Instance.new("UICorner")
+    fillCorner.CornerRadius = UDim.new(0, 6)
+    fillCorner.Parent = progressFill
+
+    local pctLabel = Instance.new("TextLabel")
+    pctLabel.Size = UDim2.new(1, -20, 0, 20)
+    pctLabel.Position = UDim2.new(0, 10, 0, 56)
+    pctLabel.BackgroundTransparency = 1
+    pctLabel.Text = "0%"
+    pctLabel.TextColor3 = Color3.new(1, 1, 1)
+    pctLabel.Font = Enum.Font.SourceSans
+    pctLabel.TextSize = 14
+    pctLabel.TextXAlignment = Enum.TextXAlignment.Center
+    pctLabel.Parent = frame
+
+    -- make draggable
+    local UserInputService = game:GetService("UserInputService")
+    local dragging = false
+    local dragStart
+    local startPos
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
+            lastInput = input
+        end
+    end)
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement and dragStart and startPos then
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(0, startPos.X.Offset + delta.X, 0, startPos.Y.Offset + delta.Y)
+        end
+    end)
+
+    return {
+        Gui = gui,
+        Frame = frame,
+        Fill = progressFill,
+        Pct = pctLabel,
+    }
+end
+
+local Loader = createLoaderUI()
+if Loader and Loader.Gui then
+    Loader.Gui.Enabled = false
+end
+
+local function LoaderShow()
+    if Loader and Loader.Gui then
+        Loader.Gui.Enabled = true
+    end
+end
+
+local function LoaderUpdate(pct, message)
+    if not Loader or not Loader.Fill then return end
+    pct = math.clamp(pct, 0, 1)
+    pcall(function()
+        Loader.Fill.Size = UDim2.new(pct, 0, 1, 0)
+        Loader.Pct.Text = string.format("%d%% %s", math.floor(pct * 100), message or "")
+    end)
+end
+
+local function LoaderHide()
+    if Loader and Loader.Gui then
+        Loader.Gui.Enabled = false
+    end
+end
+
 -- Debug: Preload image to verify accessibility and log results
 task.spawn(function()
     local cp = game:GetService("ContentProvider")
@@ -216,7 +369,60 @@ local Window = WindUI:CreateWindow({
         Note = "Key System. Key: 114514",
         KeyValidator = function(EnteredKey)
             if tostring(EnteredKey) == "114514" then
-                createPopup()
+                -- Show loader and preload assets
+                task.spawn(function()
+                    local assets = {
+                        "rbxassetid://87574517784098",
+                    }
+
+                    LoaderShow()
+
+                    for i, asset in ipairs(assets) do
+                        local ok, err = pcall(function()
+                            game:GetService("ContentProvider"):PreloadAsync({asset})
+                        end)
+
+                        local pct = i / #assets
+                        LoaderUpdate(pct, (ok and "已加载" or "加载失败") .. " " .. asset)
+                        if not ok then
+                            warn("Failed preload:", asset, err)
+                        end
+                    end
+
+                    LoaderUpdate(1, "完成")
+                    task.wait(0.3)
+                    LoaderHide()
+
+                    WindUI:Notify({ Title = "预加载完成", Content = "UI 贴图与资源已加载" })
+
+                    -- Refresh images gently to nudge WindUI to re-render
+                    pcall(function()
+                        local function refreshImages(parent)
+                            for _, child in pairs(parent:GetDescendants()) do
+                                if child:IsA("ImageLabel") or child:IsA("ImageButton") then
+                                    local img = child.Image
+                                    if img and img ~= "" then
+                                        child.Image = img
+                                    end
+                                end
+                            end
+                        end
+
+                        if WindUI and WindUI.ScreenGui then
+                            for _, sg in pairs(WindUI.ScreenGui:GetChildren()) do
+                                if sg:IsA("ScreenGui") or sg:IsA("Folder") or sg:IsA("Frame") then
+                                    refreshImages(sg)
+                                end
+                            end
+                        end
+
+                        if Window then refreshImages(Window) end
+                    end)
+
+                    -- Show the popup / normal flow
+                    createPopup()
+                end)
+
                 return true
             end
             return false
