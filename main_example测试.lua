@@ -532,6 +532,34 @@ for i = 1, 20 do
     })
 end
 
+-- Bulk create 20 doors tabs; each tab has 20 "Doors Control" sections; each section has 20 Open Door buttons
+-- WARNING: this will create 20*20*20 = 8000 buttons; may affect performance
+for t = 1, 20 do
+    local tabName = "doors_bulk_" .. t
+    local BulkTab = Window:Tab({
+        Title = tabName,
+        Icon = "door",
+        IconColor = Grey,
+        Border = true,
+    })
+
+    for s = 1, 20 do
+        local sIdx = s
+        local Sec = BulkTab:Section({ Title = "Doors Control " .. sIdx })
+        for b = 1, 20 do
+            local bIdx = b
+            Sec:Button({
+                Title = "Open Door " .. sIdx .. "-" .. bIdx,
+                Callback = function()
+                    print("Open Door " .. sIdx .. "-" .. bIdx .. " pressed (" .. tabName .. ")")
+                    WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
+                end
+            })
+        end
+    end
+end
+
 -- */  Elements Section  /* --
 local ElementsSection = Window:Section({
     Title = "Elements",
