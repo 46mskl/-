@@ -342,6 +342,7 @@ local Window = WindUI:CreateWindow({
     Icon = "solar:folder-2-bold-duotone",
     --IconSize = 22*2,
     NewElements = true,
+    Background = "rbxassetid://87574517784098", -- set background decal
     --Size = UDim2.fromOffset(700,700),
     
     HideSearchBar = false,
