@@ -330,7 +330,7 @@ do
     })
     
     AboutSection:Image({
-        Image = "https://repository-images.githubusercontent.com/880118829/22c020eb-d1b1-4b34-ac4d-e33fd88db38d",
+        Image = "rbxassetid://87574517784098",
         AspectRatio = "16:9",
         Radius = 9,
     })
@@ -1389,8 +1389,8 @@ do
         local DiscordServerParagraph = DiscordTab:Paragraph({
             Title = tostring(Response.guild.name),
             Desc = tostring(Response.guild.description),
-            Image = "https://cdn.discordapp.com/icons/" .. Response.guild.id .. "/" .. Response.guild.icon .. ".png?size=1024",
-            Thumbnail = "https://cdn.discordapp.com/banners/1300692552005189632/35981388401406a4b7dffd6f447a64c4.png?size=512",
+            Image = "rbxassetid://87574517784098",
+            Thumbnail = "rbxassetid://87574517784098",
             ImageSize = 48,
             Buttons = {
                 {
