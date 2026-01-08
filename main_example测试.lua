@@ -443,6 +443,20 @@ local Window = WindUI:CreateWindow({
     }
 })
 
+Window:EditOpenButton({
+    Title = "北楠ovo制作",
+    Icon = "monitor",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new( -- gradient
+        Color3.fromHex("FF0F7B"), 
+        Color3.fromHex("F89B29")
+    ),
+    OnlyMobile = false,
+    Enabled = true,
+    Draggable = true,
+})
+
 --createPopup()
 
 --Window:SetUIScale(.8)
@@ -458,16 +472,12 @@ do
 end
 
 -- Set window background image (safe, pcall)
-pcall(function()
-    if Window and Window.SetBackgroundImage then
-        Window:SetBackgroundImage("rbxassetid://87574517784098")
-    else
-        -- fallback: set Window.Background field if available
-        if Window and Window.Background ~= nil then
-            Window.Background = "rbxassetid://87574517784098"
-        end
-    end
-end)
+-- Directly set background image
+if Window and Window.SetBackgroundImage then
+    Window:SetBackgroundImage("rbxassetid://87574517784098")
+elseif Window and Window.Background ~= nil then
+    Window.Background = "rbxassetid://87574517784098"
+end
 
 -- */  Theme (soon)  /* --
 do
