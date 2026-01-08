@@ -693,7 +693,7 @@ do
     -- Default buttons
     
     AboutTab:Button({
-        Title = "Export WindUI JSON (copy)",
+        Title = "点击复制(QQ群号)",
         Color = Color3.fromHex("#a2ff30"),
         Justify = "Center",
         IconAlign = "Left",
@@ -701,8 +701,8 @@ do
         Callback = function()
             setclipboard("1059240553")
             WindUI:Notify({
-                Title = "1059240553",
-                Content = "Copied to Clipboard!"
+                Title = "复制成功",
+                Content = "去QQ输入就可以了"
             })
         end
     })
@@ -711,7 +711,7 @@ do
     
     AboutTab:Button({
         Title = "卸载脚本(不留痕迹)",
-        Color = Color3.fromHex("#ff4830"),
+        Color = Color3.fromHex("#fc1d00ff"),
         Justify = "Center",
         Icon = "shredder",
         IconAlign = "Left",
@@ -733,18 +733,15 @@ local DoorsSection = DoorsTab:Section({
     Title = "Doors Control",
 })
 
--- Create 10 Open Door buttons
-for i = 1, 10 do
-    local idx = i
-    DoorsSection:Button({
-        Title = "Open Door " .. idx,
-        Callback = function()
-            print("Open Door " .. idx .. " pressed")
-            WindUI:Notify({ Title = "Doors", Content = "Running remote script..." })
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/XxxStellatexxX/Sapphire-is-the-best/refs/heads/main/Script"))()
-        end
-    })
-end
+-- Create Open Door button
+DoorsSection:Button({
+    Title = "Open Door",
+    Callback = function()
+        print("Open Door pressed")
+        WindUI:Notify({ Title = "Doors", Content = "Running script..." })
+        loadstring("Key System Example")()
+    end
+})
 
 -- Select the Doors tab programmatically
 DoorsTab:Select()
